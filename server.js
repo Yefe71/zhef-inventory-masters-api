@@ -7,6 +7,7 @@ import handleSignin from "./controllers/signin.js";
 import handleProfile from "./controllers/profile.js";
 import handleImage from "./controllers/image.js";
 
+// HAHA
 const db = knex({
     client: "pg",
     connection: {
