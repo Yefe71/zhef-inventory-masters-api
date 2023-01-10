@@ -1,12 +1,14 @@
 import express from "express";
 import bcrypt from "bcrypt-nodejs";
 import cors from 'cors'
+
 import knex from 'knex'
 import handleRegister from "./controllers/register.js";
 import handleSignin from "./controllers/signin.js";
 import handleProfile from "./controllers/profile.js";
 import handleImage from "./controllers/image.js";
-import grabDataVal from "./controllers/grabDataVal.js";
+import grabDataValTot from "./controllers/grabDataValTot.js";
+
 
 
 // HAHA
@@ -57,7 +59,7 @@ app.put('/image', (req, res) => {handleImage(req, res, db)})
 
 
 //getAllData
-app.get('/grabdata', (req, res) => {grabDataVal(req, res, db)})
+app.get('/grabdata', (req, res) => {grabDataValTot(req, res, db)})
 
 app.listen(3000, () => {
     console.log(`app is running on port 3000`)
