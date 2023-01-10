@@ -6,6 +6,8 @@ import handleRegister from "./controllers/register.js";
 import handleSignin from "./controllers/signin.js";
 import handleProfile from "./controllers/profile.js";
 import handleImage from "./controllers/image.js";
+import grabDataVal from "./controllers/grabDataVal.js";
+
 
 // HAHA
 const db = knex({
@@ -27,9 +29,7 @@ const db = knex({
 //   }
 // });
   
-
 const app = express();
-
 app.use(cors({ origin: true }));
 app.use(express.json())
 
@@ -55,6 +55,9 @@ app.get('/profile/:id', (req, res) => {handleProfile(req, res, db)})
 //IMAGE
 app.put('/image', (req, res) => {handleImage(req, res, db)})
 
+
+//getAllData
+app.get('/grabdata', (req, res) => {grabDataVal(req, res, db)})
 
 app.listen(3000, () => {
     console.log(`app is running on port 3000`)
