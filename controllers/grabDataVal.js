@@ -3,7 +3,7 @@ const grabDataVal = (req, res, db) => {
     db
     .select('valueinvat')
     .from('gas_purchase_data')
-    .whereRaw(`EXTRACT(DAY FROM datecreate) = 01`)
+    .whereRaw(`EXTRACT(DAY FROM datecreate) = ${req.query.weekDay}`)
     
         .then(values => {
             if(values){
