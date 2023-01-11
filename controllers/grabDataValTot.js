@@ -1,16 +1,23 @@
 const grabDataVal = (req, res, db) => {
-    const from = '2022-12-01';
-    const to = '2022-12-08';
+    console.log(req.query.weekStart, req.query.weekEnd)
     db
     .select('product', 'valueinvat')
     .from('gas_purchase_data')
-    .where('code', 'ADO')
-    .andWhere(db.raw("to_char(datecreate, 'DD') >= '01' AND to_char(datecreate, 'DD') <= '07'"))
+    .where(function() {
+        this.where('code', 'ADO')
+            .orWhere('code', 'ADO T')
+            .orWhere('code', 'E10')
+            .orWhere('code', 'KERO')
+            .orWhere('code', 'XCS')
+            .orWhere('code', 'XUB')
+      })
+    .andWhere(db.raw(`to_char(datecreate, 'DD') >= '${req.query.weekStart}' AND to_char(datecreate, 'DD') <= '${req.query.weekEnd}'`))
 
     
         .then(values => {
             if(values){
                 res.json(values)
+                
             } else {
                 res.status(400).json('Value not found')
             }
