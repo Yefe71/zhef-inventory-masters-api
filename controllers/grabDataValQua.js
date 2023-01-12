@@ -1,5 +1,5 @@
 const grabDataValQua = (req, res, db) => {
-    console.log(req.query.weekStart, req.query.weekEnd, 'nigga')
+    console.log(req.query.weekStart, req.query.weekEnd)
     db
     .select('product', 'quantity')
     .from('gas_purchase_data')
