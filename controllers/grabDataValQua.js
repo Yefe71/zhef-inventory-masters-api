@@ -1,15 +1,23 @@
-
-
-const grabDataVal = (req, res, db) => {
-
+const grabDataValQua = (req, res, db) => {
+    console.log(req.query.weekStart, req.query.weekEnd, 'nigga')
     db
-    .select('valueinvat')
+    .select('product', 'quantity')
     .from('gas_purchase_data')
-    .whereRaw(`EXTRACT(DAY FROM datecreate) = ${req.query.weekDay}`)
+    .where(function() {
+          this.where('code', 'ADO')
+            .orWhere('code', 'ADO T')
+            .orWhere('code', 'E10')
+            .orWhere('code', 'KERO')
+            .orWhere('code', 'XCS')
+            .orWhere('code', 'XUB')
+      })
+    .andWhere(db.raw(`to_char(datecreate, 'DD') >= '${req.query.weekStart}' AND to_char(datecreate, 'DD') <= '${req.query.weekEnd}'`))
+
     
         .then(values => {
             if(values){
                 res.json(values)
+                
             } else {
                 res.status(400).json('Value not found')
             }
@@ -18,4 +26,4 @@ const grabDataVal = (req, res, db) => {
 
 }
 
-export default grabDataVal
+export default grabDataValQua

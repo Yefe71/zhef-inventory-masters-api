@@ -5,6 +5,7 @@ import cors from 'cors'
 import knex from 'knex'
 
 import grabDataValTot from "./controllers/grabDataValTot.js";
+import grabDataValQua from "./controllers/grabDataValQua.js";
 
 
 
@@ -33,6 +34,7 @@ app.use(cors({ origin: true }));
 app.use(express.json())
 
 
+app.get('/grabdata2', (req, res) => {grabDataValQua(req, res, db)})
 
 //ROOT
 app.get('/', (req, res) => {
@@ -40,8 +42,12 @@ app.get('/', (req, res) => {
 })
 
 
+
 //getAllData
 app.get('/grabdata', (req, res) => {grabDataValTot(req, res, db)})
+
+
+
 
 app.listen(3000, () => {
     console.log(`app is running on port 3000`)
