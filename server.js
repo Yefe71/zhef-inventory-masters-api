@@ -3,10 +3,7 @@ import bcrypt from "bcrypt-nodejs";
 import cors from 'cors'
 
 import knex from 'knex'
-import handleRegister from "./controllers/register.js";
-import handleSignin from "./controllers/signin.js";
-import handleProfile from "./controllers/profile.js";
-import handleImage from "./controllers/image.js";
+
 import grabDataValTot from "./controllers/grabDataValTot.js";
 
 
@@ -41,21 +38,6 @@ app.use(express.json())
 app.get('/', (req, res) => {
     res.send("It is working")
 })
-
-//SIGN IN
-app.post('/signin', (req, res) => {handleSignin(req, res, db, bcrypt)})
-
-
-//REGISTER
-app.post('/register', (req, res) => {handleRegister(req, res, db, bcrypt)})
-
-
-//PROFILE
-app.get('/profile/:id', (req, res) => {handleProfile(req, res, db)})
-    
-
-//IMAGE
-app.put('/image', (req, res) => {handleImage(req, res, db)})
 
 
 //getAllData
