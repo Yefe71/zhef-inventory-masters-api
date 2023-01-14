@@ -2,9 +2,9 @@ const grabDataValQua = (req, res, db) => {
     console.log(req.query.weekStart, req.query.weekEnd, req.query.month)
     db
     .select('product', 'quantity')
-    .from(`gas_purchase_${req.query.month}`)
+    .from(`gas_purchase_data_${req.query.month}`)
     .where(function() {
-          this.where('code', 'ADO')
+        this.where('code', 'ADO')
             .orWhere('code', 'ADO T')
             .orWhere('code', 'E10')
             .orWhere('code', 'KERO')
