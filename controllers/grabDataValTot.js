@@ -1,8 +1,8 @@
 const grabDataVal = (req, res, db) => {
-    console.log(req.query.weekStart, req.query.weekEnd, req.query.month)
+    console.log(req.query.weekStart, req.query.weekEnd, req.query.month, req.query.year)
     db
     .select('product', 'valueinvat')
-    .from(`gas_purchase_data_${req.query.month}`)
+    .from(`gas_purchase_data_${req.query.month}_${req.query.year}`)
     .where(function() {
         this.where('code', 'ADO')
             .orWhere('code', 'ADO T')
