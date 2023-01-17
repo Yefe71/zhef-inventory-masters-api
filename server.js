@@ -6,7 +6,7 @@ import knex from 'knex'
 
 import grabDataValTot from "./controllers/grabDataValTot.js";
 import grabDataValQua from "./controllers/grabDataValQua.js";
-
+import grabDataOverall from "./controllers/grabDataOverall.js";
 
 
 // HAHA
@@ -21,13 +21,6 @@ const db = knex({
   });
   
 
-// const db = knex({
-//   client: "pg",
-//   connection: {
-//       connectionString: process.env.DATABASE_URL,
-//       ssl: { rejectUnauthorized: false },
-//   }
-// });
   
 const app = express();
 app.use(cors({ origin: true }));
@@ -41,10 +34,11 @@ app.get('/', (req, res) => {
     res.send("It is working")
 })
 
-
-
 //getAllData
 app.get('/grabdata', (req, res) => {grabDataValTot(req, res, db)})
+
+
+app.get('/grabdata3', (req, res) => {grabDataOverall(req, res, db)})
 
 
 
@@ -54,7 +48,4 @@ app.listen(3000, () => {
 })
 
 
-// app.listen(3000, () => {
-//     console.log(`app is running on port ${process.env.PORT}`)
-// })
 
